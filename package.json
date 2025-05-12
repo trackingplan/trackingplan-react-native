@@ -1,5 +1,5 @@
 {
-  "name": "trackingplan-react-native",
+  "name": "@trackingplan/react-native",
   "version": "0.1.0",
   "trackingplan": {
     "androidVersion": "1.10.0",
