@@ -23,10 +23,10 @@ Install the Trackingplan for React Native SDK with NPM or Yarn:
 
 ```sh
 # Using npm
-npm install --save trackingplan-react-native
+npm install --save @trackingplan/react-native
 
 # Using yarn
-yarn add trackingplan-react-native
+yarn add @trackingplan/react-native
 ```
 
 Follow the instructions in the next sections to configure Trackingplan in Android and iOS.
@@ -92,7 +92,7 @@ Within your existing `application` method, add the following to the top of the m
 
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-    Trackingplan.initialize(tpId: "#YourTrackingplanId")
+    Trackingplan.initialize(tpId: "YOUR_TP_ID")
     // ...other code
 }
 ```
