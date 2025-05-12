@@ -1,0 +1,12 @@
+pre-commit:
+  parallel: true
+  commands:
+    sync-version:
+      glob: 'package.json'
+      run: node scripts/sync-version.js
+    lint:
+      glob: '*.{js,ts,jsx,tsx}'
+      run: npx eslint {staged_files}
+    types:
+      glob: '*.{js,ts, jsx, tsx}'
+      run: npx tsc
