@@ -60,6 +60,7 @@
   },
   "homepage": "https://github.com/trackingplan/trackingplan-react-native#readme",
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
