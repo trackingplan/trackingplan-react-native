@@ -3,10 +3,10 @@
 ## Table of Contents
 
 - [Requirements](#requirements)
-- [Installation](#Installation)
-  - [Android](#android)
-  - [iOS](#ios)
-- [Autolinking & Rebuilding](#autolinking--rebuilding)
+- [Installation](#installation)
+  - [Choose Your Project Type](#choose-your-project-type)
+  - [Expo Projects](#expo-projects)
+  - [React Native CLI Projects](#react-native-cli-projects)
 - [Usage](#usage)
 - [Need Help?](#need-help)
 - [Learn More](#learn-more)
@@ -19,7 +19,24 @@
 
 ## Installation
 
-Install the Trackingplan for React Native SDK with NPM or Yarn:
+### Choose Your Project Type
+
+Before proceeding, identify your project type:
+
+- **Expo Projects**: Use Expo CLI, have an `app.json` or `app.config.js` file, and may use EAS Build
+- **React Native CLI Projects**: Use React Native CLI, have separate `android/` and `ios/` directories
+
+---
+
+## Expo Projects
+
+**Requirements for Expo:**
+
+- Expo SDK 50+
+- Custom development builds (Expo plugins require custom native code)
+- ⚠️ **Note**: This will NOT work with Expo Go due to native dependencies
+
+### Step 1: Install the Package
 
 ```sh
 # Using npm
@@ -29,90 +46,162 @@ npm install --save @trackingplan/react-native
 yarn add @trackingplan/react-native
 ```
 
-Follow the instructions in the next sections to configure Trackingplan in Android and iOS.
+### Step 2: Configure the Expo Plugin
 
-### Android
+Add the plugin to your `app.config.js` or `app.json`. Replace `YOUR_TP_ID` with your actual Trackingplan ID (found in your Trackingplan dashboard).
 
-1. Open your `/android/build.gradle` to include the Trackingplan adapter.
+**Option A: app.config.js**
 
-Add the adapter dependency:
+```javascript
+export default {
+  expo: {
+    name: 'Your App',
+    // ... other config
+    plugins: [
+      [
+        '@trackingplan/react-native',
+        {
+          tpId: 'YOUR_TP_ID', // Replace with your actual Trackingplan ID
+        },
+      ],
+    ],
+  },
+};
+```
 
-```gradle
-// Add this to your project's root build.gradle
-buildscript {
-    ext {
-        // ... other ext properties
-        trackingplanVersion = findProject(':trackingplan-react-native').ext.get('trackingplanVersion')
-    }
-    dependencies {
-        // ... other dependencies
-        classpath "com.trackingplan.client:adapter:$trackingplanVersion"
-    }
+**Option B: app.json**
+
+```json
+{
+  "expo": {
+    "name": "Your App",
+    "plugins": [
+      [
+        "@trackingplan/react-native",
+        {
+          "tpId": "YOUR_TP_ID"
+        }
+      ]
+    ]
+  }
 }
 ```
 
-> **Important:** The above approach is recommended to add the Trackingplan adapter. If you choose to hardcode a version string instead of using the programmatic approach, you MUST ensure that it exactly matches the version used by trackingplan-react-native, otherwise your app may experience compatibility issues.
+### Step 3: Rebuild Your Project
 
-2. Modify your `/android/app/build.gradle` to apply the Trackingplan Gradle plugin.
+```sh
+# For development builds
+npx expo run:android
+npx expo run:ios
 
-```gradle
-// ... other plugins
-apply plugin: "com.trackingplan.client"
+# For EAS builds
+eas build --platform android
+eas build --platform ios
 ```
 
-3. Open your `/android/app/src/main/java/com/{projectName}/MainApplication.kt` and add the following:
+### ✅ Expo Setup Complete!
 
-At the top of the file, import the Trackingplan SDK:
+The Expo plugin automatically handles:
 
-```kotlin
-import com.trackingplan.client.sdk.Trackingplan;
+- Android Gradle dependencies and configuration
+- iOS CocoaPods dependency
+- Native initialization code with your Trackingplan ID
+
+**No additional configuration needed!**
+
+---
+
+## React Native CLI Projects
+
+For React Native CLI projects, manual native configuration is required.
+
+### Step 1: Install the Package
+
+```sh
+# Using npm
+npm install --save @trackingplan/react-native
+
+# Using yarn
+yarn add @trackingplan/react-native
 ```
 
-Within your existing `onCreate` method, add the following right after `super.onCreate()`:
+### Step 2: Android Configuration
 
-```kotlin
-override fun onCreate() {
-  super.onCreate()
-  Trackingplan.init("YOUR_TP_ID").start(this)
-  // ...other code
-}
-```
+1. **Update root build.gradle**
 
-### iOS
+   Open `/android/build.gradle` and add the Trackingplan adapter:
 
-Open your `/ios/{projectName}/AppDelegate.swift` file and add the following:
+   ```gradle
+   buildscript {
+       ext {
+           // ... other ext properties
+           trackingplanVersion = findProject(':trackingplan_react-native').ext.get('trackingplanVersion')
+       }
+       dependencies {
+           // ... other dependencies
+           classpath "com.trackingplan.client:adapter:$trackingplanVersion"
+       }
+   }
+   ```
 
-At the top of the file, import the Trackingplan SDK:
+   > **Important:** Use the programmatic approach above to ensure version compatibility. Hardcoding a version string may cause compatibility issues.
+
+2. **Apply the Gradle plugin**
+
+   Modify `/android/app/build.gradle`:
+
+   ```gradle
+   // ... other plugins
+   apply plugin: "com.trackingplan.client"
+   ```
+
+3. **Initialize in MainApplication**
+
+   Open `/android/app/src/main/java/com/{projectName}/MainApplication.kt`:
+
+   ```kotlin
+   import com.trackingplan.client.sdk.Trackingplan // Add this import
+
+   class MainApplication : Application(), ReactApplication {
+       override fun onCreate() {
+           super.onCreate()
+           Trackingplan.init("YOUR_TP_ID").start(this) // Add this line
+           // ...other code
+       }
+   }
+   ```
+
+### Step 3: iOS Configuration
+
+Open `/ios/{projectName}/AppDelegate.swift`:
 
 ```swift
-import Trackingplan
-```
+import Trackingplan // Add this import
 
-Within your existing `application` method, add the following to the top of the method:
-
-```swift
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-    Trackingplan.initialize(tpId: "YOUR_TP_ID")
-    // ...other code
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        Trackingplan.initialize(tpId: "YOUR_TP_ID") // Add this line
+        // ...other code
+        return true
+    }
 }
 ```
 
-## Autolinking & Rebuilding
+### Step 4: Link and Rebuild
 
-Once the above steps have been completed, the Trackingplan for React Native SDK must be linked to your project and your application needs to be rebuilt.
-
-To automatically link the package, rebuild your project:
-
-```console
-# Android apps
+```sh
+# For Android
 npx react-native run-android
 
-# iOS apps
+# For iOS
 cd ios/
 pod install --repo-update
 cd ..
 npx react-native run-ios
 ```
+
+### ✅ React Native CLI Setup Complete!
 
 ## Usage
 

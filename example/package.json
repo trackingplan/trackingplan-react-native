@@ -1,5 +1,5 @@
 {
-  "name": "trackingplan-react-native-example",
+  "name": "@trackingplan/react-native-example",
   "version": "0.0.1",
   "private": true,
   "scripts": {

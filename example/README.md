@@ -42,7 +42,7 @@ The first time you create a new project, run the Ruby bundler to install CocoaPo
 bundle install
 ```
 
-Then, and every time you update your native dependencies, run:
+Then, and every time you update your native dependencies, run (from your ios directory):
 
 ```sh
 bundle exec pod install

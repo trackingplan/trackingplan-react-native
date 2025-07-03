@@ -76,7 +76,7 @@ def trackingplan_version = ext.trackingplanVersion
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation "com.trackingplan.client:sdk:$trackingplan_version"
+  api "com.trackingplan.client:sdk:$trackingplan_version"
 }
 
 react {
