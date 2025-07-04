@@ -3732,6 +3732,7 @@ __metadata:
     "@react-native/metro-config": 0.79.2
     "@react-native/typescript-config": 0.79.2
     "@types/react": ^19.0.0
+    del-cli: ^5.1.0
     react: 19.0.0
     react-native: 0.79.2
     react-native-builder-bob: ^0.40.10

@@ -34,10 +34,15 @@
     "test": "jest",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib plugin/build",
-    "prepare": "bob build && npm run build:plugin",
+    "build:library": "bob build",
+    "build:plugin": "del-cli plugin/build && tsc --build plugin",
+    "prepare": "yarn build:library && yarn build:plugin",
     "release": "release-it",
-    "build:plugin": "del-cli plugin/build && tsc --build plugin"
+    "clean": "yarn clean:library && yarn clean:plugin",
+    "clean:library": "del-cli android/build lib",
+    "clean:plugin": "del-cli plugin/build plugin/.expo",
+    "clean:examples": "yarn clean:android && yarn clean:ios && del-cli expo_example/android expo_example/ios",
+    "clean:yarn": "del-cli .yarn/cache .yarn/install-state.gz node_modules example/node_modules expo_example/node_modules"
   },
   "keywords": [
     "react-native",
