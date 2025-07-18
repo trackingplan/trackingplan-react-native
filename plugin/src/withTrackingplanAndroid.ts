@@ -130,7 +130,7 @@ const withTrackingplanAndroid: ConfigPlugin<TrackingplanPluginOptions> = (
         if (packageMatch) {
           const insertIndex = packageMatch.index! + packageMatch[0].length;
           const importStatement =
-            '\nimport com.trackingplan.client.sdk.Trackingplan';
+            '\nimport com.trackingplan.client.sdk.Trackingplan\n';
           modifiedContents =
             modifiedContents.slice(0, insertIndex) +
             importStatement +
@@ -154,7 +154,7 @@ const withTrackingplanAndroid: ConfigPlugin<TrackingplanPluginOptions> = (
             initChain += `\n            .enableDebug()`;
           }
           initChain += `\n            .start(this)${isKotlin ? '' : ';'}`;
-          const initStatement = `\n    ${initChain}`;
+          const initStatement = `\n    ${initChain}\n`;
           modifiedContents =
             modifiedContents.slice(0, insertIndex) +
             initStatement +

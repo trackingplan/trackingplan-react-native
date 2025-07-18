@@ -21,7 +21,7 @@ const withTrackingplanIOS: ConfigPlugin<TrackingplanPluginOptions> = (
         const importMatch = modifiedContents.match(importRegex);
         if (importMatch) {
           const insertIndex = importMatch.index! + importMatch[0].length;
-          const importStatement = '\nimport Trackingplan';
+          const importStatement = '\nimport Trackingplan\n';
           modifiedContents =
             modifiedContents.slice(0, insertIndex) +
             importStatement +
