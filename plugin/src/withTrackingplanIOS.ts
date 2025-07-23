@@ -1,12 +1,17 @@
 import { type ConfigPlugin, withAppDelegate } from '@expo/config-plugins';
 
-import type { TrackingplanPluginOptions } from './withTrackingplan';
+export interface TrackingplanIOSPluginOptions {
+  tpId: string;
+  environment?: string;
+  debug?: boolean;
+  tags?: Record<string, string>;
+}
 
-const withTrackingplanIOS: ConfigPlugin<TrackingplanPluginOptions> = (
+const withTrackingplanIOS: ConfigPlugin<TrackingplanIOSPluginOptions> = (
   config,
   options
 ) => {
-  const { tpId, environment, debug } = options;
+  const { tpId, environment, debug, tags } = options;
 
   // Apply AppDelegate modifications
   if (tpId) {
@@ -43,6 +48,12 @@ const withTrackingplanIOS: ConfigPlugin<TrackingplanPluginOptions> = (
           }
           if (debug) {
             initParams += `, debug: true`;
+          }
+          if (tags && Object.keys(tags).length > 0) {
+            const tagsEntries = Object.entries(tags)
+              .map(([key, value]) => `"${key}": "${value}"`)
+              .join(', ');
+            initParams += `, tags: [${tagsEntries}]`;
           }
           const initStatement = `\n    Trackingplan.initialize(${initParams})\n`;
           modifiedContents =

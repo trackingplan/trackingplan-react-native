@@ -29,9 +29,20 @@
       [
         "@trackingplan/react-native",
         {
-          "tpId": "TP3708250",
+          "android": {
+            "tpId": "TP3708250_ANDROID"
+          },
+          "ios": {
+            "tpId": "TP3708250_IOS"
+          },
           "environment": "PRODUCTION",
-          "debug": true
+          "debug": true,
+          "tags": {
+            "country": "US",
+            "language": "en",
+            "user_type": "free",
+            "feature_flag": "new_ui_enabled"
+          }
         }
       ],
       "expo-router",

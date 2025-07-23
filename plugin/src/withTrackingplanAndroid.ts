@@ -7,7 +7,12 @@ import {
 import * as fs from 'fs';
 import * as path from 'path';
 
-import type { TrackingplanPluginOptions } from './withTrackingplan';
+export interface TrackingplanAndroidPluginOptions {
+  tpId: string;
+  environment?: string;
+  debug?: boolean;
+  tags?: Record<string, string>;
+}
 
 // Helper function to get Android version from root package.json
 function getTrackingplanAndroidVersion(): string | null {
@@ -85,11 +90,10 @@ apply plugin: "com.trackingplan.client"`
   return modifiedGradle;
 }
 
-const withTrackingplanAndroid: ConfigPlugin<TrackingplanPluginOptions> = (
-  config,
-  options
-) => {
-  const { tpId, environment, debug } = options;
+const withTrackingplanAndroid: ConfigPlugin<
+  TrackingplanAndroidPluginOptions
+> = (config, options) => {
+  const { tpId, environment, debug, tags } = options;
 
   // Apply project build.gradle modifications
   config = withProjectBuildGradle(config, (config) => {
@@ -152,6 +156,12 @@ const withTrackingplanAndroid: ConfigPlugin<TrackingplanPluginOptions> = (
           }
           if (debug) {
             initChain += `\n            .enableDebug()`;
+          }
+          if (tags && Object.keys(tags).length > 0) {
+            const tagsEntries = Object.entries(tags)
+              .map(([key, value]) => `"${key}" to "${value}"`)
+              .join(', ');
+            initChain += `\n            .tags(mapOf(${tagsEntries}))`;
           }
           initChain += `\n            .start(this)${isKotlin ? '' : ';'}`;
           const initStatement = `\n    ${initChain}\n`;

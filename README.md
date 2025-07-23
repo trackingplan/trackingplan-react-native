@@ -48,9 +48,9 @@ yarn add @trackingplan/react-native
 
 ### Step 2: Configure the Expo Plugin
 
-Add the plugin to your `app.config.js` or `app.json`. Replace `YOUR_TP_ID` with your actual Trackingplan ID (found in your Trackingplan dashboard).
+Add the plugin to your `app.config.js` or `app.json` with a different `tpId` for Android and iOS.
 
-**Option A: app.config.js**
+**app.config.js**
 
 ```javascript
 export default {
@@ -61,7 +61,20 @@ export default {
       [
         '@trackingplan/react-native',
         {
-          tpId: 'YOUR_TP_ID', // Replace with your actual Trackingplan ID
+          android: {
+            tpId: 'YOUR_ANDROID_TP_ID', // Android-specific Trackingplan ID
+          },
+          ios: {
+            tpId: 'YOUR_IOS_TP_ID', // iOS-specific Trackingplan ID
+          },
+          environment: 'PRODUCTION', // Optional: shared across both platforms
+          debug: false, // Optional: shared across both platforms
+          tags: { // Optional: custom tags for tracking (shared across both platforms)
+            // For example
+            site_locale: 'es-ES',
+            country: 'ES'
+            // ...
+          },
         },
       ],
     ],
@@ -69,7 +82,7 @@ export default {
 };
 ```
 
-**Option B: app.json**
+**app.json**
 
 ```json
 {
@@ -79,7 +92,18 @@ export default {
       [
         "@trackingplan/react-native",
         {
-          "tpId": "YOUR_TP_ID"
+          "android": {
+            "tpId": "YOUR_ANDROID_TP_ID"
+          },
+          "ios": {
+            "tpId": "YOUR_IOS_TP_ID"
+          },
+          "environment": "PRODUCTION",
+          "debug": false,
+          "tags": {
+            "site_locale": "es-ES",
+            "country": "ES"
+          }
         }
       ]
     ]
@@ -106,6 +130,7 @@ The Expo plugin automatically handles:
 - Android Gradle dependencies and configuration
 - iOS CocoaPods dependency
 - Native initialization code with your Trackingplan ID
+- Custom tags configuration (if provided)
 
 **No additional configuration needed!**
 
@@ -165,7 +190,7 @@ yarn add @trackingplan/react-native
    class MainApplication : Application(), ReactApplication {
        override fun onCreate() {
            super.onCreate()
-           Trackingplan.init("YOUR_TP_ID").start(this) // Add this line
+           Trackingplan.init("YOUR_ANDROID_TP_ID").start(this) // Replace with your Android Trackingplan ID
            // ...other code
        }
    }
@@ -181,7 +206,7 @@ import Trackingplan // Add this import
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        Trackingplan.initialize(tpId: "YOUR_TP_ID") // Add this line
+        Trackingplan.initialize(tpId: "YOUR_IOS_TP_ID") // Replace with your iOS Trackingplan ID
         // ...other code
         return true
     }
