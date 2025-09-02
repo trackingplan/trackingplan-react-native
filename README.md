@@ -232,6 +232,26 @@ npx react-native run-ios
 
 At this point, your app is ready to start monitoring traffic sent to your data destinations with Trackingplan.
 
+### Updating Tags After Initialization
+
+You can dynamically update tags after the SDK has been initialized using the `updateTags` method. This is particularly useful for updating tags that change during the app lifecycle, such as user locale preferences.
+
+```typescript
+import Trackingplan from '@trackingplan/react-native';
+
+// Update tags when user changes language/locale
+Trackingplan.updateTags({
+  site_locale: 'es-ES',
+  country: 'ES'
+});
+```
+
+The `updateTags` method:
+- Merges new tags with existing ones
+- Overwrites values for existing keys
+- Takes effect immediately for all subsequent tracked events
+- Tags should be string key-value pairs only
+
 ## Need Help?
 
 Questions? Problems? Need more info? We can help! Contact us [here](mailto:team@trackingplan.com).
