@@ -15,8 +15,8 @@ const withTrackingplanIOS: ConfigPlugin<TrackingplanIOSPluginOptions> = (
 
   // Apply AppDelegate modifications
   if (tpId) {
-    config = withAppDelegate(config, (config) => {
-      const { contents } = config.modResults;
+    config = withAppDelegate(config, (cfg) => {
+      const { contents } = cfg.modResults;
       let modifiedContents = contents;
 
       // Add import if not already present
@@ -46,14 +46,14 @@ const withTrackingplanIOS: ConfigPlugin<TrackingplanIOSPluginOptions> = (
           if (environment) {
             initParams += `, environment: "${environment}"`;
           }
-          if (debug) {
-            initParams += `, debug: true`;
-          }
           if (tags && Object.keys(tags).length > 0) {
             const tagsEntries = Object.entries(tags)
               .map(([key, value]) => `"${key}": "${value}"`)
               .join(', ');
             initParams += `, tags: [${tagsEntries}]`;
+          }
+          if (debug) {
+            initParams += `, debug: true`;
           }
           const initStatement = `\n    Trackingplan.initialize(${initParams})\n`;
           modifiedContents =
@@ -63,8 +63,8 @@ const withTrackingplanIOS: ConfigPlugin<TrackingplanIOSPluginOptions> = (
         }
       }
 
-      config.modResults.contents = modifiedContents;
-      return config;
+      cfg.modResults.contents = modifiedContents;
+      return cfg;
     });
   }
 

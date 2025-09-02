@@ -96,29 +96,29 @@ const withTrackingplanAndroid: ConfigPlugin<
   const { tpId, environment, debug, tags } = options;
 
   // Apply project build.gradle modifications
-  config = withProjectBuildGradle(config, (config) => {
-    if (config.modResults.language === 'groovy') {
-      config.modResults.contents = setTrackingplanClassPath(
-        config.modResults.contents
+  config = withProjectBuildGradle(config, (cfg) => {
+    if (cfg.modResults.language === 'groovy') {
+      cfg.modResults.contents = setTrackingplanClassPath(
+        cfg.modResults.contents
       );
     }
-    return config;
+    return cfg;
   });
 
   // Apply app build.gradle modifications
-  config = withAppBuildGradle(config, (config) => {
-    if (config.modResults.language === 'groovy') {
-      config.modResults.contents = applyTrackingplanPlugin(
-        config.modResults.contents
+  config = withAppBuildGradle(config, (cfg) => {
+    if (cfg.modResults.language === 'groovy') {
+      cfg.modResults.contents = applyTrackingplanPlugin(
+        cfg.modResults.contents
       );
     }
-    return config;
+    return cfg;
   });
 
   // Apply MainApplication modifications
   if (tpId) {
-    config = withMainApplication(config, (config) => {
-      const { language, contents } = config.modResults;
+    config = withMainApplication(config, (cfg) => {
+      const { language, contents } = cfg.modResults;
       const isKotlin = language === 'kt';
 
       let modifiedContents = contents;
@@ -172,8 +172,8 @@ const withTrackingplanAndroid: ConfigPlugin<
         }
       }
 
-      config.modResults.contents = modifiedContents;
-      return config;
+      cfg.modResults.contents = modifiedContents;
+      return cfg;
     });
   }
 
