@@ -1,17 +1,5 @@
-import { Text, View, StyleSheet } from 'react-native';
+import MainScreen from './screens/MainScreen';
 
 export default function Index() {
-  return (
-    <View style={styles.container}>
-      <Text>Hello Trackingplan</Text>
-    </View>
-  );
+  return <MainScreen />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
