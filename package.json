@@ -1,6 +1,6 @@
 {
   "name": "@trackingplan/react-native",
-  "version": "0.3.0",
+  "version": "0.2.0",
   "trackingplan": {
     "androidVersion": "1.11.1",
     "iosVersion": "1.5.0"
