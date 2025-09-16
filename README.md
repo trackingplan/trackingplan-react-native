@@ -16,6 +16,7 @@
 
 - react-native >=0.77
 - Android: minSdkVersion >= 24
+- Android: Gradle Plugin >= 8.0.2
 
 ## Installation
 

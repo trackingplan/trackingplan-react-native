@@ -1781,7 +1781,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - Yoga
   - SocketRocket (0.7.1)
-  - Trackingplan (1.5.0)
+  - Trackingplan (1.6.1)
   - TrackingplanReactNative (0.3.0):
     - DoubleConversion
     - glog
@@ -1805,7 +1805,7 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - Trackingplan (= 1.5.0)
+    - Trackingplan (= 1.6.1)
     - Yoga
   - Yoga (0.0.0)
 
@@ -2113,8 +2113,8 @@ SPEC CHECKSUMS:
   ReactCommon: 44c86ec3ace664c0f33b7a2ac89aced8304ef25e
   RNScreens: f0678748c5310b49a3f920f1485f5ec477afd345
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
-  Trackingplan: 4e33ebf29fd45a7399628a6b86c53fc27174c3e4
-  TrackingplanReactNative: 9af89425447796b3813fcdb57d9e7c95cd500182
+  Trackingplan: 4f48d9e39791ffcc80043f36f80a6bc8be9b5a58
+  TrackingplanReactNative: a93c6e6e0b025f9bfa4bfefbf17f73a0ff2d3ef4
   Yoga: dc7c21200195acacb62fa920c588e7c2106de45e
 
 PODFILE CHECKSUM: 75042b8ee069f7c96c6dd0fa588b0b8f798528f9
