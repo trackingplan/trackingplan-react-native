@@ -3,7 +3,8 @@
   "version": "0.4.1",
   "trackingplan": {
     "androidVersion": "2.1.0",
-    "iosVersion": "1.6.1"
+    "androidPluginVersion": "2.1.2",
+    "iosVersion": "1.6.5"
   },
   "description": "Trackingplan for React Native SDK",
   "main": "./lib/module/index.js",
@@ -73,7 +74,7 @@
     "@react-native-community/cli": "^20.0.1",
     "@react-native/babel-preset": "0.79.2",
     "@react-native/eslint-config": "^0.78.0",
-    "@release-it/conventional-changelog": "^10.0.1",
+    "@release-it/conventional-changelog": "^10.0.4",
     "@tsconfig/node-lts": "^22.0.2",
     "@types/jest": "^29.5.5",
     "@types/node": "^20.0.0",
@@ -170,5 +171,15 @@
     "languages": "kotlin-objc",
     "type": "turbo-module",
     "version": "0.50.2"
+  },
+  "resolutions": {
+    "qs": "6.14.1",
+    "glob@^10.2.2": "10.5.0",
+    "glob@^10.3.10": "10.5.0",
+    "glob@^10.4.2": "10.5.0",
+    "on-headers": "1.1.0",
+    "tar": "^7.5.7",
+    "lodash": "^4.17.23",
+    "fast-xml-parser": "^5.0.5"
   }
 }
