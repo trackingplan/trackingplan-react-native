@@ -13,35 +13,43 @@ const gradlePropertiesPath = path.resolve(
 // Read the package.json file
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
-// Get the androidVersion from package.json
-const androidVersion = packageJson.trackingplan.androidVersion;
+// Get versions from package.json
+const androidSdkVersion = packageJson.trackingplan.androidVersion;
+const androidPluginVersion = packageJson.trackingplan.androidPluginVersion;
 
 // Read the current gradle.properties
-const gradlePropertiesContent = fs.readFileSync(gradlePropertiesPath, 'utf8');
+let content = fs.readFileSync(gradlePropertiesPath, 'utf8');
+let changed = false;
 
-let versionChanged = false;
-
-// Check if the trackingplanVersion property already exists
-if (gradlePropertiesContent.includes('trackingplanVersion=')) {
-  // Replace the existing version
-  const updatedGradleProperties = gradlePropertiesContent.replace(
-    /trackingplanVersion=.*/,
-    `trackingplanVersion=${androidVersion}`
-  );
-
-  if (updatedGradleProperties !== gradlePropertiesContent) {
-    fs.writeFileSync(gradlePropertiesPath, updatedGradleProperties, 'utf8');
-    versionChanged = true;
-  }
-} else {
-  // Add the version property
-  const updatedGradleProperties = `${gradlePropertiesContent}\ntrackingplanVersion=${androidVersion}\n`;
-  fs.writeFileSync(gradlePropertiesPath, updatedGradleProperties, 'utf8');
-  versionChanged = true;
+// Sync trackingplanSdkVersion (from androidVersion)
+const sdkReplaced = content.replace(
+  /trackingplanSdkVersion=.*/,
+  `trackingplanSdkVersion=${androidSdkVersion}`
+);
+if (sdkReplaced !== content) {
+  content = sdkReplaced;
+  changed = true;
+} else if (!content.includes('trackingplanSdkVersion=')) {
+  content += `\ntrackingplanSdkVersion=${androidSdkVersion}\n`;
+  changed = true;
 }
 
-if (versionChanged) {
+// Sync trackingplanVersion (from androidPluginVersion — adapter)
+const pluginReplaced = content.replace(
+  /trackingplanVersion=.*/,
+  `trackingplanVersion=${androidPluginVersion}`
+);
+if (pluginReplaced !== content) {
+  content = pluginReplaced;
+  changed = true;
+} else if (!content.includes('trackingplanVersion=')) {
+  content += `\ntrackingplanVersion=${androidPluginVersion}\n`;
+  changed = true;
+}
+
+if (changed) {
+  fs.writeFileSync(gradlePropertiesPath, content, 'utf8');
   console.log(
-    `Updated trackingplanVersion to ${androidVersion} in gradle.properties`
+    `Updated gradle.properties: trackingplanSdkVersion=${androidSdkVersion}, trackingplanVersion=${androidPluginVersion}`
   );
 }

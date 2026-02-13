@@ -4,6 +4,7 @@ buildscript {
   }
   ext {
     trackingplanVersion = project.properties['trackingplanVersion']
+    trackingplanSdkVersion = project.properties['trackingplanSdkVersion']
   }
   repositories {
     google()
@@ -71,12 +72,12 @@ repositories {
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
-def trackingplan_version = ext.trackingplanVersion
+def trackingplan_sdk_version = ext.trackingplanSdkVersion
 
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  api "com.trackingplan.client:sdk:$trackingplan_version"
+  api "com.trackingplan.client:sdk:$trackingplan_sdk_version"
 }
 
 react {

@@ -14,8 +14,11 @@ export interface TrackingplanAndroidPluginOptions {
   tags?: Record<string, string>;
 }
 
-// Helper function to get Android version from root package.json
-function getTrackingplanAndroidVersion(): string | null {
+// Helper function to read trackingplan config from root package.json
+function getTrackingplanPackageConfig(): {
+  androidVersion: string | null;
+  androidPluginVersion: string | null;
+} {
   try {
     // Go up from plugin/build to root directory (since compiled code is in build/)
     const rootPackageJsonPath = path.join(
@@ -27,20 +30,29 @@ function getTrackingplanAndroidVersion(): string | null {
     const packageJson = JSON.parse(
       fs.readFileSync(rootPackageJsonPath, 'utf8')
     );
-    const version = packageJson.trackingplan?.androidVersion;
-    if (!version) {
+    const trackingplan = packageJson.trackingplan;
+    if (!trackingplan?.androidVersion) {
       console.warn(
         'Trackingplan: androidVersion not found in package.json trackingplan section'
       );
-      return null;
+      return { androidVersion: null, androidPluginVersion: null };
     }
-    return version;
+    if (!trackingplan.androidPluginVersion) {
+      console.warn(
+        'Trackingplan: androidPluginVersion not found in package.json trackingplan section'
+      );
+      return { androidVersion: null, androidPluginVersion: null };
+    }
+    return {
+      androidVersion: trackingplan.androidVersion,
+      androidPluginVersion: trackingplan.androidPluginVersion,
+    };
   } catch (error) {
     console.warn(
       'Trackingplan: Could not read package.json for androidVersion:',
       error
     );
-    return null;
+    return { androidVersion: null, androidPluginVersion: null };
   }
 }
 
@@ -50,8 +62,8 @@ function setTrackingplanClassPath(buildGradle: string): string {
     return buildGradle;
   }
 
-  const androidVersion = getTrackingplanAndroidVersion();
-  if (!androidVersion) {
+  const { androidPluginVersion } = getTrackingplanPackageConfig();
+  if (!androidPluginVersion) {
     console.warn(
       'Trackingplan: Skipping Android build.gradle modifications due to missing version'
     );
@@ -62,14 +74,14 @@ function setTrackingplanClassPath(buildGradle: string): string {
   return buildGradle.replace(
     /dependencies\s*{/,
     `dependencies {
-    classpath "com.trackingplan.client:adapter:${androidVersion}"`
+    classpath "com.trackingplan.client:adapter:${androidPluginVersion}"`
   );
 }
 
 // Helper function to apply plugin and add dependency
 function applyTrackingplanPlugin(appBuildGradle: string): string {
-  const androidVersion = getTrackingplanAndroidVersion();
-  if (!androidVersion) {
+  const { androidPluginVersion } = getTrackingplanPackageConfig();
+  if (!androidPluginVersion) {
     console.warn(
       'Trackingplan: Skipping Android app build.gradle modifications due to missing version'
     );
