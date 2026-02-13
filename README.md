@@ -253,6 +253,32 @@ The `updateTags` method:
 - Takes effect immediately for all subsequent tracked events
 - Tags should be string key-value pairs only
 
+## Updating the SDK
+
+When a new version of `@trackingplan/react-native` is released, update the package:
+
+```sh
+# Using npm
+npm install --save @trackingplan/react-native@latest
+
+# Using yarn
+yarn add @trackingplan/react-native@latest
+```
+
+**Expo projects** will pick up the new native versions automatically on the next build.
+
+**React Native CLI projects** need to update iOS pods after upgrading:
+
+```sh
+cd ios/
+pod update Trackingplan --repo-update
+cd ..
+```
+
+> **Note:** `pod install` alone won't update the native SDK because `Podfile.lock` pins the previous version. Use `pod update Trackingplan` to resolve the new version.
+
+Android dependencies are updated automatically via Gradle on the next build.
+
 ## Need Help?
 
 Questions? Problems? Need more info? We can help! Contact us [here](mailto:team@trackingplan.com).

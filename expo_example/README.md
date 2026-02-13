@@ -13,8 +13,12 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 2. Start the app
 
    ```bash
-   npm start
+   npm run android
+   # or
+   npm run ios
    ```
+
+  NOTE: This app does not work in Expo Go since it depends on Native Modules
 
 In the output, you'll find options to open the app in a
 
