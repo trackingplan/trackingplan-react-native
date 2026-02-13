@@ -14,3 +14,6 @@ gem 'bigdecimal'
 gem 'logger'
 gem 'benchmark'
 gem 'mutex_m'
+
+# Security fix for REXML vulnerability
+gem 'rexml', '>= 3.4.2'
