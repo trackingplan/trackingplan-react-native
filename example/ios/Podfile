@@ -27,11 +27,22 @@ target 'TrackingplanReactNativeExample' do
 
   post_install do |installer|
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+    ccache_enabled = ENV.fetch('USE_CCACHE', 'false') == 'true'
     react_native_post_install(
       installer,
       config[:reactNativePath],
       :mac_catalyst_enabled => false,
-      # :ccache_enabled => true
+      :ccache_enabled => ccache_enabled
     )
+
+    # Disable Xcode's index store when using ccache — ccache doesn't support
+    # the -index-store-path flag, which causes compilation errors on cache miss.
+    if ccache_enabled
+      installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+          config.build_settings['COMPILER_INDEX_STORE_ENABLE'] = 'NO'
+        end
+      end
+    end
   end
 end

@@ -1781,7 +1781,9 @@ PODS:
     - ReactCommon/turbomodule/core
     - Yoga
   - SocketRocket (0.7.1)
-  - Trackingplan (1.6.5)
+  - SwiftProtobuf (1.36.1)
+  - Trackingplan (2.0.1):
+    - SwiftProtobuf (~> 1.28)
   - TrackingplanReactNative (0.4.2):
     - DoubleConversion
     - glog
@@ -1805,7 +1807,7 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - Trackingplan (= 1.6.5)
+    - Trackingplan (= 2.0.1)
     - Yoga
   - Yoga (0.0.0)
 
@@ -1889,6 +1891,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - SocketRocket
+    - SwiftProtobuf
     - Trackingplan
 
 EXTERNAL SOURCES:
@@ -2113,10 +2116,11 @@ SPEC CHECKSUMS:
   ReactCommon: 44c86ec3ace664c0f33b7a2ac89aced8304ef25e
   RNScreens: f0678748c5310b49a3f920f1485f5ec477afd345
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
-  Trackingplan: ec59095fef072301476668361bfc5e31e6121e57
-  TrackingplanReactNative: 51bca6270f77033ed849b8cddfb0a5812bec35ff
+  SwiftProtobuf: 9e106a71456f4d3f6a3b0c8fd87ef0be085efc38
+  Trackingplan: 7966457e26c82939d26479f2b36e05f94bfd989e
+  TrackingplanReactNative: 871701a35ff4326241000008ce0507417d907107
   Yoga: dc7c21200195acacb62fa920c588e7c2106de45e
 
-PODFILE CHECKSUM: 75042b8ee069f7c96c6dd0fa588b0b8f798528f9
+PODFILE CHECKSUM: dab43d25631dfbbf74152bab7d7323dad9d81972
 
 COCOAPODS: 1.15.2
