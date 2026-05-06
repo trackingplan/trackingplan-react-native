@@ -1,10 +1,10 @@
 {
   "name": "@trackingplan/react-native",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "trackingplan": {
-    "androidVersion": "3.0.1",
+    "androidVersion": "3.1.0",
     "androidPluginVersion": "2.2.0",
-    "iosVersion": "2.0.1"
+    "iosVersion": "2.1.0"
   },
   "description": "Trackingplan for React Native SDK",
   "main": "./lib/module/index.js",
@@ -180,22 +180,24 @@
     "on-headers": "1.1.0",
     "tar": "^7.5.11",
     "lodash": ">=4.18.0",
-    "fast-xml-parser": "^5.5.6",
+    "fast-xml-parser": ">=5.7.0 <6",
     "minimatch@^3": "3.1.5",
     "minimatch@^5": "5.1.9",
     "minimatch@^9": "9.0.9",
     "undici": "^6.24.0",
     "flatted": "^3.4.0",
-    "basic-ftp": ">=5.2.0",
+    "basic-ftp": ">=5.3.0 <6",
     "handlebars": "^4.7.9",
     "node-forge": ">=1.4.0",
-    "@xmldom/xmldom": "0.8.12",
+    "@xmldom/xmldom@^0.8": ">=0.8.13 <0.9",
     "yaml@^2": ">=2.8.3",
     "picomatch@^2": "2.3.2",
     "picomatch@^3": "3.0.2",
     "picomatch@^4": "4.0.4",
     "brace-expansion@^1": "1.1.13",
     "brace-expansion@^2": "2.0.3",
-    "defu": "6.1.5"
+    "defu": "6.1.5",
+    "uuid": "^14.0.0",
+    "postcss": ">=8.5.10 <9"
   }
 }
