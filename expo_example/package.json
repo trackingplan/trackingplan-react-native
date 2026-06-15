@@ -16,7 +16,7 @@
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/elements": "^2.3.8",
     "@react-navigation/native": "^7.1.6",
-    "@trackingplan/react-native": "file:trackingplan-react-native-0.6.0.tgz",
+    "@trackingplan/react-native": "file:trackingplan-react-native-0.6.1.tgz",
     "expo": "^54",
     "expo-blur": "~15.0.8",
     "expo-build-properties": "~1.0.10",
@@ -63,10 +63,15 @@
       "picomatch@^2": "2.3.2",
       "picomatch@^3": "3.0.2",
       "picomatch@^4": "4.0.4",
-      "brace-expansion@^5": "5.0.5",
-      "protobufjs": ">=7.5.5 <8",
+      "brace-expansion@^5": ">=5.0.6 <6",
+      "protobufjs": ">=7.5.8 <8",
+      "@protobufjs/utf8": ">=1.1.1 <2",
+      "fast-uri": ">=3.1.2 <4",
       "uuid": "^14.0.0",
-      "postcss": ">=8.5.10 <9"
+      "postcss": ">=8.5.10 <9",
+      "ws@^8": ">=8.20.1 <9",
+      "shell-quote": ">=1.8.4 <2",
+      "@grpc/grpc-js": ">=1.9.16 <1.10"
     }
   },
   "private": true,

@@ -1784,7 +1784,7 @@ PODS:
   - SwiftProtobuf (1.37.0)
   - Trackingplan (2.1.0):
     - SwiftProtobuf (~> 1.28)
-  - TrackingplanReactNative (0.5.1-dev):
+  - TrackingplanReactNative (0.6.1-dev):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2118,7 +2118,7 @@ SPEC CHECKSUMS:
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   SwiftProtobuf: 3fafd1b2fb97e6d95ad9c8adb2215da9afec7c83
   Trackingplan: 783c459a6a9738eb23ca3266a5347d1e900509e4
-  TrackingplanReactNative: 8a750ef73b9e90c59e164aab5dc6e7638591e077
+  TrackingplanReactNative: 3e8c3493c9f5f778b69b590266f2bea024c66c39
   Yoga: dc7c21200195acacb62fa920c588e7c2106de45e
 
 PODFILE CHECKSUM: dab43d25631dfbbf74152bab7d7323dad9d81972
