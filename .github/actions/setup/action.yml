@@ -9,6 +9,15 @@ runs:
       with:
         node-version-file: .nvmrc
 
+    # Installs the pnpm version declared in expo_example/package.json without
+    # going through corepack, whose bundled npm signing keys depend on the
+    # Node version and break on key rotations.
+    - name: Setup pnpm
+      uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
+      with:
+        package_json_file: expo_example/package.json
+        run_install: false
+
     - name: Restore dependencies
       id: yarn-cache
       uses: actions/cache/restore@v4
@@ -25,7 +34,7 @@ runs:
       if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: |
         yarn install --immutable
-        cd expo_example && corepack enable pnpm && pnpm install --frozen-lockfile
+        cd expo_example && pnpm install --frozen-lockfile
       shell: bash
 
     - name: Cache dependencies
