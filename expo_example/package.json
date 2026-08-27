@@ -16,7 +16,7 @@
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/elements": "^2.3.8",
     "@react-navigation/native": "^7.1.6",
-    "@trackingplan/react-native": "file:trackingplan-react-native-0.6.1.tgz",
+    "@trackingplan/react-native": "file:trackingplan-react-native-0.6.2.tgz",
     "expo": "^54",
     "expo-blur": "~15.0.8",
     "expo-build-properties": "~1.0.10",
@@ -55,25 +55,6 @@
     "minimatch": "^10.2.3",
     "ajv": "^8.18.0"
   },
-  "pnpm": {
-    "overrides": {
-      "node-forge": ">=1.4.0",
-      "@xmldom/xmldom@^0.8": ">=0.8.13 <0.9",
-      "yaml@^2": ">=2.8.3",
-      "picomatch@^2": "2.3.2",
-      "picomatch@^3": "3.0.2",
-      "picomatch@^4": "4.0.4",
-      "brace-expansion@^5": ">=5.0.6 <6",
-      "protobufjs": ">=7.5.8 <8",
-      "@protobufjs/utf8": ">=1.1.1 <2",
-      "fast-uri": ">=3.1.2 <4",
-      "uuid": "^14.0.0",
-      "postcss": ">=8.5.10 <9",
-      "ws@^8": ">=8.20.1 <9",
-      "shell-quote": ">=1.8.4 <2",
-      "@grpc/grpc-js": ">=1.9.16 <1.10"
-    }
-  },
   "private": true,
-  "packageManager": "pnpm@10.33.0"
+  "packageManager": "pnpm@11.13.1"
 }

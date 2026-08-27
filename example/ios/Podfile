@@ -44,5 +44,17 @@ target 'TrackingplanReactNativeExample' do
         end
       end
     end
+
+    # Xcode 26's clang enforces C++20 consteval strictly, which rejects the
+    # FMT_STRING calls in RCT-Folly's vendored fmt (RN 0.79.6 pins fmt 11.x).
+    # Building only the fmt pod as C++17 makes FMT_USE_CONSTEVAL 0, so the
+    # format-string checks fall back to runtime. Scoped to fmt so RN's other
+    # pods keep C++20. Drop this once RN ships fmt 12.1+ (>= 0.83.9 / 0.85).
+    installer.pods_project.targets.each do |target|
+      next unless target.name == 'fmt'
+      target.build_configurations.each do |config|
+        config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++17'
+      end
+    end
   end
 end
